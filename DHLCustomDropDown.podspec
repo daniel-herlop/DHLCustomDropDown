@@ -6,7 +6,7 @@ s.name = "DHLCustomDropDown"
 s.summary = "Selector de un item/items de un listado"
 s.requires_arc = true
 
-s.version = "0.1.1"
+s.version = "0.1.2"
 
 s.license = { :type => "MIT", :file => "LICENSE" }
 
