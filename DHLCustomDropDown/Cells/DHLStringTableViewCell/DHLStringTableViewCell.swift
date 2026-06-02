@@ -22,20 +22,19 @@ class DHLStringTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // titleLabel.font = FontsHelper.normal(size: 14)
-        // subtitleLabel.font = FontsHelper.normal(size: 14)
         bottomLineHeightConstraint.constant = 0.5
     }
     
-    func setUp(title: String, subtitle: String? = nil, hideSeparator: Bool = false) {
+    func setUp(title: String, subtitle: String? = nil, hideSeparator: Bool = false, titleFont: UIFont? = nil, subtitleFont: UIFont? = nil) {
         titleLabel.text = title
         
+        titleLabel.font = titleFont ?? .systemFont(ofSize: 14)
+        subtitleLabel.font = subtitleFont ?? .systemFont(ofSize: 14)
+        
         if let subtitle = subtitle {
-            // titleLabel.font = FontsHelper.semiBold(size: 14)
             subtitleLabel.text = subtitle
             labelSeparationConstraint.constant = -2
         } else {
-            // titleLabel.font = FontsHelper.normal(size: 14)
             subtitleLabel.text = ""
             labelSeparationConstraint.constant = 0
         }

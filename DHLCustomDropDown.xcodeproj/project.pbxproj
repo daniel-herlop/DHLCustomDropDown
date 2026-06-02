@@ -13,6 +13,7 @@
 		D72F1B5A2FC8792F001FAD27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D72F1B592FC8792F001FAD27 /* Assets.xcassets */; };
 		D72F1B5F2FC879A2001FAD27 /* DHLStringTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F1B5C2FC879A2001FAD27 /* DHLStringTableViewCell.swift */; };
 		D72F1B602FC879A2001FAD27 /* DHLStringTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D72F1B5D2FC879A2001FAD27 /* DHLStringTableViewCell.xib */; };
+		D77B34C22FCEFA0D00DAD377 /* Strings.strings in Resources */ = {isa = PBXBuildFile; fileRef = D77B34C02FCEFA0D00DAD377 /* Strings.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		D72F1B5C2FC879A2001FAD27 /* DHLStringTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHLStringTableViewCell.swift; sourceTree = "<group>"; };
 		D72F1B5D2FC879A2001FAD27 /* DHLStringTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DHLStringTableViewCell.xib; sourceTree = "<group>"; };
 		D73309862FC874FA009F85FD /* DHLCustomDropDown.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DHLCustomDropDown.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D77B34C32FCEFA1B00DAD377 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Strings.strings; sourceTree = "<group>"; };
 		DA6BDF16D50A3CD7AB7FE63A /* libPods-DHLCustomDropDown.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DHLCustomDropDown.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -61,6 +63,7 @@
 			children = (
 				D72F1B5B2FC8798F001FAD27 /* Cells */,
 				D72F1B572FC87915001FAD27 /* Custom */,
+				D72F1B582FC8791C001FAD27 /* Resources */,
 			);
 			path = DHLCustomDropDown;
 			sourceTree = "<group>";
@@ -86,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				D72F1B592FC8792F001FAD27 /* Assets.xcassets */,
+				D77B34C02FCEFA0D00DAD377 /* Strings.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -111,7 +115,6 @@
 			isa = PBXGroup;
 			children = (
 				D72F1B4F2FC877B0001FAD27 /* DHLCustomDropDown */,
-				D72F1B582FC8791C001FAD27 /* Resources */,
 				D73309872FC874FA009F85FD /* Products */,
 				59284051AD6436F86CA3E2F9 /* Pods */,
 				87DF846762E96A9DBBC2B274 /* Frameworks */,
@@ -174,11 +177,11 @@
 				};
 			};
 			buildConfigurationList = D73309802FC874FA009F85FD /* Build configuration list for PBXProject "DHLCustomDropDown" */;
-			developmentRegion = en;
+			developmentRegion = es;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				es,
 			);
 			mainGroup = D733097C2FC874FA009F85FD;
 			minimizedProjectReferenceProxies = 1;
@@ -198,6 +201,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D72F1B602FC879A2001FAD27 /* DHLStringTableViewCell.xib in Resources */,
+				D77B34C22FCEFA0D00DAD377 /* Strings.strings in Resources */,
 				D72F1B5A2FC8792F001FAD27 /* Assets.xcassets in Resources */,
 				D72F1B562FC878EE001FAD27 /* DHLCustomDropDown.xib in Resources */,
 			);
@@ -242,12 +246,24 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		D77B34C02FCEFA0D00DAD377 /* Strings.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D77B34C32FCEFA1B00DAD377 /* es */,
+			);
+			name = Strings.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		D733098D2FC874FA009F85FD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -314,6 +330,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

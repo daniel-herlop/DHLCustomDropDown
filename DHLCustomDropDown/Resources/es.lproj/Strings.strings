@@ -1,0 +1,11 @@
+/* 
+  Strings.strings
+  DHLCustomDropDown
+
+  Created by Daniel Hernandez on 2/6/26.
+  
+*/
+"dropdown"=". Desplegable";
+"elements_number"=". %i elementos ";
+"description_element_number_of"="%@. Elemento %i de %i";
+// TODO tradudir a varios idiomas

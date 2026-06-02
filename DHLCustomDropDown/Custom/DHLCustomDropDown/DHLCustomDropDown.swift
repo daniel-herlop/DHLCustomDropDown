@@ -8,30 +8,33 @@
 import Foundation
 import UIKit
 
-class CustomDropDown: UIView {
+open class DHLCustomDropDown: UIView {
 
-    @IBOutlet weak var containerView: UIView!
+    @IBOutlet public weak var containerView: UIView!
     
     @IBOutlet weak var separatorHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewHeightContraint: NSLayoutConstraint!
     
-    @IBOutlet weak var dropDownButton: UIButton!
-    @IBOutlet weak var dropDownTitle: UILabel!
-    @IBOutlet weak var arrowImageView: UIImageView!
+    @IBOutlet public weak var dropDownButton: UIButton!
+    @IBOutlet public weak var dropDownTitle: UILabel!
+    @IBOutlet public weak var arrowImageView: UIImageView!
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet public weak var tableView: UITableView!
     
     private var itemSelectedAction: ((String, Int) -> Void)?
     
-    var selectionType: SelectionType = .single
+    public var selectionType: SelectionType = .single
     private var title: String = ""
     
-    var items: [String] = []
-    var itemSubtitles: [String]?
+    public var items: [String] = []
+    public var itemSubtitles: [String]?
     private var heightLimit: CGFloat?
     private var accessibilityTitleLabel: String?
-
-    var selectedItem: [String] = []
+    private var cellTitleFont: UIFont? = nil
+    private var cellSubtitleFont: UIFont? = nil
+    private var arrowTintColor: UIColor = .black
+    
+    public var selectedItem: [String] = []
     
     override init(frame: CGRect) {
 
@@ -39,7 +42,7 @@ class CustomDropDown: UIView {
         nibSetup()
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
 
         super.init(coder: aDecoder)
         nibSetup()
@@ -49,7 +52,11 @@ class CustomDropDown: UIView {
 
         backgroundColor = .clear
 
-        if let xibView = Bundle.main.loadNibNamed("CustomDropDown", owner: self, options: nil)?.first as? UIView {
+        let bundle = Bundle(for: DHLCustomDropDown.self)
+
+        if let xibView = bundle.loadNibNamed("DHLCustomDropDown",
+                                             owner: self,
+                                             options: nil)?.first as? UIView {
 
             xibView.frame = self.bounds
             xibView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -59,34 +66,29 @@ class CustomDropDown: UIView {
         }
     }
 
-    override func awakeFromNib() {
+    public override func awakeFromNib() {
 
         super.awakeFromNib()
 
         commonInit()
     }
 
-    func commonInit() {
+    open func commonInit() {
         // la altura de la vista se calcula automaticamente, en el storyboard hay que poner una altura con baja prioridad o placeholder/"remove at build time".
         tableViewHeightContraint.constant = 0
         containerView.layer.cornerRadius = 8
         containerView.layer.borderColor = UIColor.lightGray.cgColor
         containerView.layer.borderWidth = 0.5
-        // containerView.bordered(width: 0.5, color: R.color.gray_border())
         
-        tableView.register(UINib(nibName: "StringTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "StringTableViewCell")
-        
-        // dropDownTitle.font = FontsHelper.normal(size: 14)
+        tableView.register(UINib(nibName: "DHLStringTableViewCell", bundle: Bundle(for: DHLStringTableViewCell.self)), forCellReuseIdentifier: "DHLStringTableViewCell")
         
         separatorHeightConstraint.constant = 0.5
-        
-        // arrowImageView.image = R.image.arrow_down()!.tinted(withColor: R.color.blue_app())
         
         dropDownButton.accessibilityLabel = ""
         dropDownTitle.isAccessibilityElement = false
     }
 
-    func setUp(title: String, accessibilityTitleLabel: String? = nil, items: [String], itemSubtitles: [String]? = nil, selectionType: SelectionType = .single, heightLimit: CGFloat? = nil, itemSelectedAction: @escaping ((String, Int) -> Void)) {
+    public func setUp(title: String, accessibilityTitleLabel: String? = nil, items: [String], itemSubtitles: [String]? = nil, selectionType: SelectionType = .single, heightLimit: CGFloat? = nil, titleFont: UIFont? = nil, cellTitleFont: UIFont? = nil, cellSubtitleFont: UIFont? = nil, arrowTintColor: UIColor = .black, itemSelectedAction: @escaping ((String, Int) -> Void)) {
         self.items = items
         self.itemSubtitles = itemSubtitles
         self.selectionType = selectionType
@@ -94,8 +96,25 @@ class CustomDropDown: UIView {
         self.heightLimit = heightLimit
         self.itemSelectedAction = itemSelectedAction
         self.accessibilityTitleLabel = accessibilityTitleLabel
+        self.cellTitleFont = cellTitleFont
+        self.cellSubtitleFont = cellSubtitleFont
+        self.arrowTintColor = arrowTintColor
         
-        // dropDownButton.accessibilityLabel = (accessibilityTitleLabel ?? title).appending(R.string.accessibility.dropdown()).appending(R.string.accessibility.elements_number(items.count))
+        arrowImageView.image = UIImage(named: "arrow_down", in: Bundle(for: DHLCustomDropDown.self), compatibleWith: nil)!.withTintColor(arrowTintColor)
+        
+        dropDownTitle.font = titleFont ?? .systemFont(ofSize: 14)
+  
+        dropDownButton.accessibilityLabel = (accessibilityTitleLabel ?? title)
+            .appending(NSLocalizedString("dropdown", bundle: Bundle(for: DHLCustomDropDown.self), comment: ""))
+            .appending(String(
+                format: NSLocalizedString(
+                    "description_element_number_of",
+                    bundle: Bundle(for: DHLCustomDropDown.self),
+                    comment: ""
+                ),
+                items.count
+                )
+            )
         
         tableViewHeightContraint.constant = 0
         dropDownTitle.text = title
@@ -109,22 +128,22 @@ class CustomDropDown: UIView {
         reloadData()
     }
     
-    func deselectAllItems() {
+    public func deselectAllItems() {
         dropDownTitle.text = title
-        // dropDownTitle.textColor = R.color.gray_app()
+        dropDownTitle.textColor = UIColor.lightGray
         selectedItem = []
         
-        // tableView.deselectAllRows(animated: false)
+        tableView.deselectAllRows(animated: false)
     }
     
-    func reloadData() {
+    public func reloadData() {
         
         tableView.delegate = self
         tableView.dataSource = self
         tableView.reloadData()
     }
     
-    func selectItem(itemToSelect: String) {
+    public func selectItem(itemToSelect: String) {
         if let index = items.firstIndex(where: { $0.lowercased() == itemToSelect.lowercased() }) {
             
             let indexPath = IndexPath(row: index, section: 0)
@@ -135,7 +154,7 @@ class CustomDropDown: UIView {
     
     @IBAction func dropDownPressed(_ sender: Any) {
         if tableViewHeightContraint.constant == 0 {
-            // arrowImageView.image = R.image.arrow_up()!.tinted(withColor: R.color.blue_app())
+            arrowImageView.image = UIImage(named: "arrow_up", in: Bundle(for: DHLCustomDropDown.self), compatibleWith: nil)!.withTintColor(arrowTintColor)
             
             var cellsHeight: CGFloat = DHLStringTableViewCell.cellHeight * CGFloat(items.count)
             
@@ -158,7 +177,7 @@ class CustomDropDown: UIView {
             
         } else {
             tableViewHeightContraint.constant = 0
-            // arrowImageView.image = R.image.arrow_down()!.tinted(withColor: R.color.blue_app())
+            arrowImageView.image = UIImage(named: "arrow_down", in: Bundle(for: DHLCustomDropDown.self), compatibleWith: nil)!.withTintColor(arrowTintColor)
         }
     }
 }
@@ -166,34 +185,44 @@ class CustomDropDown: UIView {
 // ********************************************
 // MARK: - UITableView Delegate & Datasource
 // ********************************************
-extension CustomDropDown: UITableViewDelegate, UITableViewDataSource {
+extension DHLCustomDropDown: UITableViewDelegate, UITableViewDataSource {
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "DHLStringTableViewCell", for: indexPath) as? DHLStringTableViewCell {
             
             if itemSubtitles != nil {
-                cell.setUp(title: items[indexPath.row], subtitle: itemSubtitles![indexPath.row])
+                cell.setUp(title: items[indexPath.row], subtitle: itemSubtitles![indexPath.row], titleFont: cellTitleFont, subtitleFont: cellSubtitleFont)
                 
             } else {
-                cell.setUp(title: items[indexPath.row])
+                cell.setUp(title: items[indexPath.row], titleFont: cellTitleFont, subtitleFont: cellSubtitleFont)
             }
             
             if selectionType == .single {
                 cell.selectionStyle = .none
             }
             
-            // cell.titleLabel.accessibilityLabel = R.string.accessibility.description_element_number_of(items[indexPath.row], indexPath.row + 1, items.count)
+           
+            cell.titleLabel.accessibilityLabel = String(
+                format: NSLocalizedString(
+                    "description_element_number_of",
+                    bundle: Bundle(for: DHLCustomDropDown.self),
+                    comment: ""
+                ),
+                items[indexPath.row],
+                indexPath.row + 1,
+                items.count
+            )
             
             return cell
         }
         return UITableViewCell()
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
         if itemSubtitles != nil {
             return DHLStringTableViewCell.cellHeightTwoLines
@@ -201,7 +230,7 @@ extension CustomDropDown: UITableViewDelegate, UITableViewDataSource {
         return DHLStringTableViewCell.cellHeight
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if selectionType == .single {
             
             selectedItem = [items[indexPath.row]]
@@ -210,12 +239,32 @@ extension CustomDropDown: UITableViewDelegate, UITableViewDataSource {
             
             tableViewHeightContraint.constant = 0
             
-            // arrowImageView.image = R.image.arrow_down()!.tinted(withColor: R.color.blue_app())
+            arrowImageView.image = UIImage(named: "arrow_down", in: Bundle(for: DHLCustomDropDown.self), compatibleWith: nil)!.withTintColor(arrowTintColor)
             
             if let selectedItem = selectedItem.first {
                 itemSelectedAction?(selectedItem, indexPath.row)
                 
-                // dropDownButton.accessibilityLabel = (accessibilityTitleLabel ?? title).appending(R.string.accessibility.dropdown()).appending(R.string.accessibility.elements_number(items.count)).appending(R.string.accessibility.item_selected(selectedItem))
+                dropDownButton.accessibilityLabel = (accessibilityTitleLabel ?? title)
+                    .appending(NSLocalizedString("dropdown", bundle: Bundle(for: DHLCustomDropDown.self), comment: ""))
+                    .appending(String(
+                        format: NSLocalizedString(
+                            "elements_number",
+                            bundle: Bundle(for: DHLCustomDropDown.self),
+                            comment: ""
+                        ),
+                        items.count
+                        )
+                    )
+                    .appending(String(
+                        format: NSLocalizedString(
+                            "item_selected",
+                            bundle: Bundle(for: DHLCustomDropDown.self),
+                            comment: ""
+                        ),
+                        selectedItem
+                        )
+                    )
+                
                 UIAccessibility.post(notification: .layoutChanged, argument: self)
             }
             
@@ -224,33 +273,80 @@ extension CustomDropDown: UITableViewDelegate, UITableViewDataSource {
             dropDownTitle.text = selectedItem.joined(separator: ", ")
             dropDownTitle.textColor = .black
             
-            // dropDownButton.accessibilityLabel = (accessibilityTitleLabel ?? title).appending(R.string.accessibility.dropdown()).appending(R.string.accessibility.elements_number(items.count)).appending(R.string.accessibility.item_selected(selectedItem.joined(separator: ", ")))
+            dropDownButton.accessibilityLabel = (accessibilityTitleLabel ?? title)
+                .appending(NSLocalizedString("dropdown", bundle: Bundle(for: DHLCustomDropDown.self), comment: ""))
+                .appending(String(
+                    format: NSLocalizedString(
+                        "elements_number",
+                        bundle: Bundle(for: DHLCustomDropDown.self),
+                        comment: ""
+                    ),
+                    items.count
+                    )
+                )
+                .appending(String(
+                    format: NSLocalizedString(
+                        "item_selected",
+                        bundle: Bundle(for: DHLCustomDropDown.self),
+                        comment: ""
+                    ),
+                    selectedItem.joined(separator: ", ")
+                    )
+                )
             
             if selectedItem.isEmpty {
-               // dropDownTitle.textColor = R.color.gray_app()
-                
-               // dropDownButton.accessibilityLabel = (accessibilityTitleLabel ?? title).appending(R.string.accessibility.dropdown()).appending(R.string.accessibility.elements_number(items.count))
+                dropDownTitle.textColor = UIColor.lightGray
+                            
+                dropDownButton.accessibilityLabel = (accessibilityTitleLabel ?? title)
+                    .appending(NSLocalizedString("dropdown", bundle: Bundle(for: DHLCustomDropDown.self), comment: ""))
+                    .appending(String(
+                        format: NSLocalizedString(
+                            "elements_number",
+                            bundle: Bundle(for: DHLCustomDropDown.self),
+                            comment: ""
+                        ),
+                        items.count
+                        )
+                    )
             }
         }
     }
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         if selectionType == .multiple {
             
-            // selectedItem.removeFirst(where: { $0 == items[indexPath.row] })
+            selectedItem.removeFirst(where: { $0 == items[indexPath.row] })
             
             dropDownTitle.text = selectedItem.joined(separator: ", ")
             dropDownTitle.textColor = .black
             
             if selectedItem.isEmpty {
-                // dropDownTitle.textColor = R.color.gray_app()
+                dropDownTitle.textColor = UIColor.lightGray
                 dropDownTitle.text = title
             }
         }
     }
 }
 
-enum SelectionType {
+public enum SelectionType {
     case single
     case multiple
+}
+
+extension UITableView {
+    func deselectAllRows(animated: Bool) {
+        guard let selectedRows = indexPathsForSelectedRows else { return }
+        for indexPath in selectedRows { deselectRow(at: indexPath, animated: animated) }
+    }
+}
+
+// ********************************************
+// MARK: - RangeReplaceableCollection
+// ********************************************
+ extension RangeReplaceableCollection {
+    @discardableResult
+    mutating func removeFirst(where predicate: (Element) throws -> Bool) rethrows -> Element? {
+        guard let index = try firstIndex(where: predicate) else { return nil }
+        return remove(at: index)
+    }
 }
