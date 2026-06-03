@@ -19,6 +19,7 @@ pod 'DHLCustomDropDown'
 
 The view height is calculated automatically; in the storyboard, you need to put a low priority height or placeholder/"remove at build time".
 
+```swift
 @IBOutlet weak var myDropDown: CustomDropDown!
 
 myDropDown.setUp(
@@ -31,3 +32,4 @@ myDropDown.setUp(
 )
 
 myDropDown.selectItem(itemToSelect: "Item 1")
+```
