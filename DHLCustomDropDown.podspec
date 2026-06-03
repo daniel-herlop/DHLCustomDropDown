@@ -22,7 +22,7 @@ s.framework = "UIKit"
 s.source_files = "DHLCustomDropDown/**/*.{swift}"
 
 # 9
-s.resources = "DHLCustomDropDown/**/*.{png,jpeg,jpg,storyboard,xib,xcassets}"
+s.resources = "DHLCustomDropDown/**/*.{png,jpeg,jpg,storyboard,xib,xcassets,strings}"
 
 # 10
 s.swift_version = "5.0"

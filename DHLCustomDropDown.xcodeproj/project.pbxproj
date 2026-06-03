@@ -26,6 +26,7 @@
 		D72F1B5D2FC879A2001FAD27 /* DHLStringTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DHLStringTableViewCell.xib; sourceTree = "<group>"; };
 		D73309862FC874FA009F85FD /* DHLCustomDropDown.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DHLCustomDropDown.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D77B34C32FCEFA1B00DAD377 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Strings.strings; sourceTree = "<group>"; };
+		D77B34C42FD030FE00DAD377 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Strings.strings; sourceTree = "<group>"; };
 		DA6BDF16D50A3CD7AB7FE63A /* libPods-DHLCustomDropDown.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DHLCustomDropDown.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -182,6 +183,7 @@
 			knownRegions = (
 				Base,
 				es,
+				en,
 			);
 			mainGroup = D733097C2FC874FA009F85FD;
 			minimizedProjectReferenceProxies = 1;
@@ -251,6 +253,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				D77B34C32FCEFA1B00DAD377 /* es */,
+				D77B34C42FD030FE00DAD377 /* en */,
 			);
 			name = Strings.strings;
 			sourceTree = "<group>";

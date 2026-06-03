@@ -1,0 +1,10 @@
+/* 
+  Strings.strings
+  DHLCustomDropDown
+
+  Created by Daniel Hernandez on 2/6/26.
+  
+*/
+"dropdown"=". Dropdown";
+"elements_number"=". %i elements ";
+"description_element_number_of"="%@. Element %i of %i";

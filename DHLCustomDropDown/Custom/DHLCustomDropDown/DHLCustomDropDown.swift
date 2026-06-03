@@ -103,12 +103,13 @@ open class DHLCustomDropDown: UIView {
         arrowImageView.image = UIImage(named: "arrow_down", in: Bundle(for: DHLCustomDropDown.self), compatibleWith: nil)!.withTintColor(arrowTintColor)
         
         dropDownTitle.font = titleFont ?? .systemFont(ofSize: 14)
-  
+        
         dropDownButton.accessibilityLabel = (accessibilityTitleLabel ?? title)
-            .appending(NSLocalizedString("dropdown", bundle: Bundle(for: DHLCustomDropDown.self), comment: ""))
+            .appending(NSLocalizedString("dropdown", tableName: "Strings", bundle: Bundle(for: DHLCustomDropDown.self), comment: ""))
             .appending(String(
                 format: NSLocalizedString(
-                    "description_element_number_of",
+                    "elements_number",
+                    tableName: "Strings",
                     bundle: Bundle(for: DHLCustomDropDown.self),
                     comment: ""
                 ),
@@ -209,6 +210,7 @@ extension DHLCustomDropDown: UITableViewDelegate, UITableViewDataSource {
             cell.titleLabel.accessibilityLabel = String(
                 format: NSLocalizedString(
                     "description_element_number_of",
+                    tableName: "Strings",
                     bundle: Bundle(for: DHLCustomDropDown.self),
                     comment: ""
                 ),
@@ -245,10 +247,11 @@ extension DHLCustomDropDown: UITableViewDelegate, UITableViewDataSource {
                 itemSelectedAction?(selectedItem, indexPath.row)
                 
                 dropDownButton.accessibilityLabel = (accessibilityTitleLabel ?? title)
-                    .appending(NSLocalizedString("dropdown", bundle: Bundle(for: DHLCustomDropDown.self), comment: ""))
+                    .appending(NSLocalizedString("dropdown", tableName: "Strings", bundle: Bundle(for: DHLCustomDropDown.self), comment: ""))
                     .appending(String(
                         format: NSLocalizedString(
                             "elements_number",
+                            tableName: "Strings",
                             bundle: Bundle(for: DHLCustomDropDown.self),
                             comment: ""
                         ),
@@ -258,6 +261,7 @@ extension DHLCustomDropDown: UITableViewDelegate, UITableViewDataSource {
                     .appending(String(
                         format: NSLocalizedString(
                             "item_selected",
+                            tableName: "Strings",
                             bundle: Bundle(for: DHLCustomDropDown.self),
                             comment: ""
                         ),
@@ -274,10 +278,11 @@ extension DHLCustomDropDown: UITableViewDelegate, UITableViewDataSource {
             dropDownTitle.textColor = .black
             
             dropDownButton.accessibilityLabel = (accessibilityTitleLabel ?? title)
-                .appending(NSLocalizedString("dropdown", bundle: Bundle(for: DHLCustomDropDown.self), comment: ""))
+                .appending(NSLocalizedString("dropdown", tableName: "Strings", bundle: Bundle(for: DHLCustomDropDown.self), comment: ""))
                 .appending(String(
                     format: NSLocalizedString(
                         "elements_number",
+                        tableName: "Strings",
                         bundle: Bundle(for: DHLCustomDropDown.self),
                         comment: ""
                     ),
@@ -287,6 +292,7 @@ extension DHLCustomDropDown: UITableViewDelegate, UITableViewDataSource {
                 .appending(String(
                     format: NSLocalizedString(
                         "item_selected",
+                        tableName: "Strings",
                         bundle: Bundle(for: DHLCustomDropDown.self),
                         comment: ""
                     ),
@@ -298,10 +304,11 @@ extension DHLCustomDropDown: UITableViewDelegate, UITableViewDataSource {
                 dropDownTitle.textColor = UIColor.lightGray
                             
                 dropDownButton.accessibilityLabel = (accessibilityTitleLabel ?? title)
-                    .appending(NSLocalizedString("dropdown", bundle: Bundle(for: DHLCustomDropDown.self), comment: ""))
+                    .appending(NSLocalizedString("dropdown", tableName: "Strings", bundle: Bundle(for: DHLCustomDropDown.self), comment: ""))
                     .appending(String(
                         format: NSLocalizedString(
                             "elements_number",
+                            tableName: "Strings",
                             bundle: Bundle(for: DHLCustomDropDown.self),
                             comment: ""
                         ),
