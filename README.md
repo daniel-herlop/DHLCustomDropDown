@@ -5,7 +5,11 @@ Desplegable para seleccionar un elemento de una lista.
 ![Swift](https://img.shields.io/badge/Swift-5.0-orange)
 ![Platform](https://img.shields.io/badge/iOS-14%2B-blue)
 
-## Instalación
+## Preview
+![Screenshot](docs/screenshot1.png)
+![Screenshot](docs/screenshot2.png)
+
+## Installation
 
 ### CocoaPods
 
