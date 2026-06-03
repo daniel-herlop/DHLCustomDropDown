@@ -1,6 +1,6 @@
 # DHLCustomDropDown
 
-Desplegable para seleccionar un elemento de una lista.
+Delegable to select an item/items from a list.
 
 ![Swift](https://img.shields.io/badge/Swift-5.0-orange)
 ![Platform](https://img.shields.io/badge/iOS-14%2B-blue)
